@@ -25,12 +25,12 @@ export const getRequiredRoles = (url: string) => {
   if (foundItem?.roles) {
     return foundItem.roles;
   }
-  const parentSection = NAV_LINKS.navMain.find(
-    (section) => section.url === url
-  );
-  if (parentSection?.roles) {
-    return parentSection.roles;
-  }
+  // const parentSection = NAV_LINKS.navMain.find(
+  //   (section) => section.url === url
+  // );
+  // if (parentSection?.roles) {
+  //   return parentSection.roles;
+  // }
   return ["user"];
 };
 const validateToken = async (token: string) => {
