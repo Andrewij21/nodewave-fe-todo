@@ -33,56 +33,35 @@ export const getRequiredRoles = (url: string) => {
   }
   return ["user"];
 };
-
 // const validateToken = async (token: string) => {
 //   try {
-//     const response = await fetch(
-//       `${process.env.NEXT_PUBLIC_API_URL}/verify-token`,
-//       {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       }
+//     const response = await fetch(`${process.env.API_URL}/verify-token`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({ token: token }),
+//     });
 
-//     );
-//     if (!response.ok) return false;
-//     const res = await response.json();
-//     return res.data.user;
+//     if (!response.ok) {
+//       console.error(
+//         "Token validation failed on server:",
+//         await response.text()
+//       );
+//       return false;
+//     }
+//     return true;
 //   } catch (error) {
 //     console.error("Token validation failed:", error);
 //     return false;
 //   }
 // };
-const validateToken = async (token: string) => {
-  try {
-    const response = await fetch(`${process.env.API_URL}/verify-token`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ token: token }),
-    });
-
-    if (!response.ok) {
-      console.error(
-        "Token validation failed on server:",
-        await response.text()
-      );
-      return false;
-    }
-    return true;
-  } catch (error) {
-    console.error("Token validation failed:", error);
-    return false;
-  }
-};
 export async function middleware(request: NextRequest) {
   const protectedRoutes = getProtectedRoutes();
   const { pathname } = request.nextUrl;
-  const sessionToken = request.cookies.get("session_token")?.value;
-  const user = sessionToken ? await validateToken(sessionToken) : false;
-  const isValidToken = !!user;
+  // const sessionToken = request.cookies.get("session_token")?.value;
+  // const user = sessionToken ? await validateToken(sessionToken) : false;
+  const isValidToken = true;
 
   const isProtectedRoute = protectedRoutes.some((route) =>
     pathname.startsWith(route)
