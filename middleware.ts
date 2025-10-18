@@ -33,27 +33,6 @@ export const getRequiredRoles = (url: string) => {
   }
   return ["user"];
 };
-
-// const validateToken = async (token: string) => {
-//   try {
-//     const response = await fetch(
-//       `${process.env.NEXT_PUBLIC_API_URL}/verify-token`,
-//       {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       }
-
-//     );
-//     if (!response.ok) return false;
-//     const res = await response.json();
-//     return res.data.user;
-//   } catch (error) {
-//     console.error("Token validation failed:", error);
-//     return false;
-//   }
-// };
 const validateToken = async (token: string) => {
   try {
     const response = await fetch(`${process.env.API_URL}/verify-token`, {
