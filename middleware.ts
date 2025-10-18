@@ -56,16 +56,13 @@ export const getRequiredRoles = (url: string) => {
 // };
 const validateToken = async (token: string) => {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/verify-token`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ token: token }),
-      }
-    );
+    const response = await fetch(`${process.env.API_URL}/verify-token`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token: token }),
+    });
 
     if (!response.ok) {
       console.error(
