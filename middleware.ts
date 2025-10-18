@@ -33,33 +33,33 @@ export const getRequiredRoles = (url: string) => {
   // }
   return ["user"];
 };
-const validateToken = async (token: string) => {
-  try {
-    const response = await fetch(
-      `https://fe-test-api.nwappservice.com/verify-token`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ token: token }),
-      }
-    );
+// const validateToken = async (token: string) => {
+//   try {
+//     const response = await fetch(
+//       `https://fe-test-api.nwappservice.com/verify-token`,
+//       {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({ token: token }),
+//       }
+//     );
 
-    if (!response.ok) {
-      console.error(
-        "Token validation failed on server:",
-        await response.text()
-      );
-      return false;
-    }
-    const userData = await response.json();
-    return userData; // e.g., { id: 1, role: 'admin', ... }
-  } catch (error) {
-    console.error("Token validation failed:", error);
-    return false;
-  }
-};
+//     if (!response.ok) {
+//       console.error(
+//         "Token validation failed on server:",
+//         await response.text()
+//       );
+//       return false;
+//     }
+//     const userData = await response.json();
+//     return userData; // e.g., { id: 1, role: 'admin', ... }
+//   } catch (error) {
+//     console.error("Token validation failed:", error);
+//     return false;
+//   }
+// };
 // const validateToken = async (token: string) => {
 //   try {
 //     const response = await fetch(`${process.env.API_URL}/verify-token`, {
@@ -87,19 +87,19 @@ export async function middleware(request: NextRequest) {
   const protectedRoutes = getProtectedRoutes();
   const { pathname } = request.nextUrl;
   const sessionToken = request.cookies.get("session_token")?.value;
-  const user = sessionToken ? await validateToken(sessionToken) : false;
-  const isValidToken = !!user;
+  // const user = sessionToken ? await validateToken(sessionToken) : false;
+  // const isValidToken = !!user;
 
   const isProtectedRoute = protectedRoutes.some((route) =>
     pathname.startsWith(route)
   );
-  if (isProtectedRoute && !isValidToken) {
+  if (isProtectedRoute && !sessionToken) {
     const redirectUrl = new URL("/login", request.url);
     redirectUrl.searchParams.set("redirect", pathname);
     return NextResponse.redirect(redirectUrl);
   }
 
-  if (!isProtectedRoute && isValidToken) {
+  if (!isProtectedRoute && sessionToken) {
     return NextResponse.redirect(new URL("/todo", request.url));
   }
 
