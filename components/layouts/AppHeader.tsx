@@ -19,6 +19,7 @@ import { getInitials } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/authStore";
 import { toast } from "sonner";
+import type { AppHeaderProps } from "@/types";
 
 export default function AppHeader({
   breadcrumbs,
