@@ -50,7 +50,8 @@ const validateToken = async (token: string) => {
       );
       return false;
     }
-    return true;
+    const userData = await response.json();
+    return userData; // e.g., { id: 1, role: 'admin', ... }
   } catch (error) {
     console.error("Token validation failed:", error);
     return false;
