@@ -50,12 +50,12 @@ export default function RegisterForm() {
       fullName: `${data.firstName} ${data.lastName}`,
       email: data.email,
       password: data.password,
-      firstName: data.firstName,
-      lastName: data.lastName,
-      phoneNumber: data.phoneNumber,
-      country: data.country,
-      confirmPassword: data.confirmPassword,
-      about: data.about,
+      // firstName: data.firstName,
+      // lastName: data.lastName,
+      // phoneNumber: data.phoneNumber,
+      // country: data.country,
+      // confirmPassword: data.confirmPassword,
+      // about: data.about,
     } as any;
     mutate(payload, {
       onSuccess: () => {

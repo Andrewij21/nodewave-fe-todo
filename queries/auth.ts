@@ -18,9 +18,8 @@ const login = async (credentials: LoginSchema) => {
   Cookies.set("session_token", data.content.token, { expires: 7 });
   return data;
 };
-const register = async (credentials: RegisterSchema) => {
-  registerSchema.parse(credentials);
-  console.log({ credentials });
+const register = async (credentials: any) => {
+  // registerSchema.parse(credentials);
   const data: any = await apiClient.post("/register", credentials);
   return data;
 };
