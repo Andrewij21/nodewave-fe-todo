@@ -56,6 +56,29 @@ const validateToken = async (token: string) => {
     return false;
   }
 };
+// const validateToken = async (token: string) => {
+//   try {
+//     const response = await fetch(`${process.env.API_URL}/verify-token`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({ token: token }),
+//     });
+
+//     if (!response.ok) {
+//       console.error(
+//         "Token validation failed on server:",
+//         await response.text()
+//       );
+//       return false;
+//     }
+//     return true;
+//   } catch (error) {
+//     console.error("Token validation failed:", error);
+//     return false;
+//   }
+// };
 export async function middleware(request: NextRequest) {
   const protectedRoutes = getProtectedRoutes();
   const { pathname } = request.nextUrl;
