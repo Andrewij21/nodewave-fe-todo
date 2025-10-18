@@ -1,8 +1,21 @@
 // middleware.ts
 
 import { NextResponse, type NextRequest } from "next/server";
-import { NAV_LINKS } from "./constants";
-
+const NAV_LINKS = {
+  navMain: [
+    {
+      title: "Node Wave",
+      url: "#",
+      items: [
+        {
+          title: "Todo",
+          url: "/todo",
+          roles: ["USER", "ADMIN"],
+        },
+      ],
+    },
+  ],
+};
 // Extract and format the protected routes into a simple array of strings
 export const getProtectedRoutes = () => {
   return NAV_LINKS.navMain.flatMap((section) => {
